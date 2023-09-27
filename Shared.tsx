@@ -13,25 +13,32 @@ import {
 } from "react-native";
 import styles from "./styles";
 
-export function LabelText(props: TextProps) {
+export function LabelText({ children, style, ...props }: TextProps) {
   return (
-    <RenderHighlightText style={styles.labelText}>
-      {props.children}
+    <RenderHighlightText style={[styles.labelText, style]} {...props}>
+      {children}
     </RenderHighlightText>
   );
 }
 
-export function TitleText(props: TextProps) {
+export function TitleText({ children, style, ...props }: TextProps) {
   return (
-    <RenderHighlightText style={styles.titleText}>
-      {props.children}
+    <RenderHighlightText style={[styles.titleText, style]} {...props}>
+      {children}
     </RenderHighlightText>
   );
 }
-export function SubtitleText(props: TextProps) {
+export function SubtitleText({
+  children,
+  style,
+  ...props
+}: TextProps) {
   return (
-    <RenderHighlightText style={styles.subTitleText}>
-      {props.children}
+    <RenderHighlightText
+      style={[styles.subTitleText, style]}
+      {...props}
+    >
+      {children}
     </RenderHighlightText>
   );
 }
