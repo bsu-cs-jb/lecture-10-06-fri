@@ -8,7 +8,16 @@ export function fetchMenu() {
       description: "The best Cheeseburger ever made.",
       calories: 870,
       price: 6.99,
-      labels: ["meatie"],
+      labels: [],
+      allergens: ["wheat", "eggs"],
+    },
+    {
+      id: genid(),
+      name: "Hamburger",
+      description: "Made with authentic aged ham",
+      calories: 770,
+      price: 5.99,
+      labels: [],
       allergens: ["wheat", "eggs"],
     },
     {
