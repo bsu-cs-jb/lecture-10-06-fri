@@ -1,7 +1,13 @@
 import * as React from "react";
 import { ScrollView, View } from "react-native";
 import styles from "./styles";
-import { BigButton, FlexFill, LabelText, TitleText } from "./Shared";
+import {
+  BigButton,
+  FlexFill,
+  LabelText,
+  SubtitleText,
+  TitleText,
+} from "./Shared";
 
 interface BagItemViewProps {
   item: BagItem;
@@ -50,14 +56,18 @@ export default function BagView({
         style={styles.scrollView}
         contentContainerStyle={styles.scrollViewContent}
       >
-        {bag.map((item) => (
-          <BagItemView
-            key={item.id}
-            item={item}
-            onDecrement={onDecrement}
-            onIncrement={onIncrement}
-          />
-        ))}
+        {bag.length > 0 ? (
+          bag.map((item) => (
+            <BagItemView
+              key={item.id}
+              item={item}
+              onDecrement={onDecrement}
+              onIncrement={onIncrement}
+            />
+          ))
+        ) : (
+          <SubtitleText>Order something...</SubtitleText>
+        )}
       </ScrollView>
     </View>
   );

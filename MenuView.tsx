@@ -6,6 +6,7 @@ import {
   FlexFill,
   LabelText,
   LctView,
+  SubtitleText,
   TitleText,
 } from "./Shared";
 
@@ -51,13 +52,17 @@ export default function MenuView({
         style={styles.scrollView}
         contentContainerStyle={styles.scrollViewContent}
       >
-        {menu.map((item) => (
-          <MenuItemView
-            key={item.id}
-            item={item}
-            onPress={handleAddItem}
-          />
-        ))}
+        {menu.length > 0 ? (
+          menu.map((item) => (
+            <MenuItemView
+              key={item.id}
+              item={item}
+              onPress={handleAddItem}
+            />
+          ))
+        ) : (
+          <SubtitleText>Loading menu...</SubtitleText>
+        )}
       </ScrollView>
     </LctView>
   );
