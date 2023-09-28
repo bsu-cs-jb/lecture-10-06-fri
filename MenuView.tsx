@@ -1,11 +1,5 @@
 import * as React from "react";
-import {
-  Button,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { Button, ScrollView, Text, View } from "react-native";
 import styles from "./styles";
 import {
   BigButton,

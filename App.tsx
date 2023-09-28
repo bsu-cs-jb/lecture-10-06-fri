@@ -4,82 +4,18 @@ import styles from "./styles";
 import { TitleText } from "./Shared";
 import MenuView from "./MenuView";
 import BagView from "./BagView";
-import { genid } from "./utils";
-
-const MENU = [
-  {
-    id: genid(),
-    name: "Cheeseburger",
-    description: "The best Cheeseburger ever made.",
-    calories: 870,
-    price: 6.99,
-    labels: ["meatie"],
-    allergens: ["wheat", "eggs"],
-  },
-  {
-    id: genid(),
-    name: "Fries",
-    description: "'Freedom' fries",
-    calories: 230,
-    price: 2.99,
-    labels: ["vegetarian"],
-    allergens: ["gluten", "peanuts"],
-  },
-  {
-    id: genid(),
-    name: "Donuts",
-    description: "Dunkin'",
-    calories: 430,
-    price: 3.99,
-    labels: ["vegetarian"],
-    allergens: ["wheat", "peanuts"],
-  },
-  {
-    id: genid(),
-    name: "Soda",
-    description: "More calories than anyone needs",
-    calories: 250,
-    price: 2.99,
-    labels: ["vegetarian", "vegan"],
-    allergens: [],
-  },
-];
-
-function findFoodItemIndex(
-  foodItemId: string,
-  bag: BagItem[],
-): number {
-  return bag.findIndex(
-    (bagItem) => bagItem.foodItemId === foodItemId,
-  );
-}
-
-function addFoodToBag(food: FoodItem, bag: BagItem[]) {
-  const foodItemIndex = findFoodItemIndex(food.id, bag);
-  if (foodItemIndex == -1) {
-    return [
-      ...bag,
-      {
-        id: genid(),
-        foodItemId: food.id,
-        name: food.name,
-        quantity: 1,
-      },
-    ];
-  } else {
-    const updatedBag = [...bag];
-    updatedBag[foodItemIndex].quantity += 1;
-    return updatedBag;
-  }
-}
+import { addFoodToBag } from "./OrderUtils";
+import { fetchMenu } from "./OrderData";
 
 export default function App() {
   const [menu, setMenu] = React.useState<FoodItem[]>([]);
   const [bag, setBag] = React.useState<BagItem[]>([]);
 
   React.useEffect(() => {
-    // fetch menu from server
-    setMenu(MENU);
+    // fetch menu from server (fake)
+    fetchMenu().then((newMenu) => {
+      setMenu(newMenu);
+    });
   }, []);
 
   const handleAddItem = (item: FoodItem) => {
