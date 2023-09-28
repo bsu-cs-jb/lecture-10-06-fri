@@ -43,5 +43,4 @@ export function fetchMenu() {
   return new Promise<FoodItem[]>((resolve, reject) => {
     setTimeout(() => resolve(MENU), 1800);
   });
-  // return Promise.resolve(MENU);
 }

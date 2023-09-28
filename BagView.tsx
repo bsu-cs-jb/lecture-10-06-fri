@@ -3,6 +3,35 @@ import { ScrollView, View } from "react-native";
 import styles from "./styles";
 import { BigButton, FlexFill, LabelText, TitleText } from "./Shared";
 
+interface BagItemViewProps {
+  item: BagItem;
+  onIncrement: (item: BagItem) => void;
+  onDecrement: (item: BagItem) => void;
+}
+function BagItemView({
+  item,
+  onDecrement,
+  onIncrement,
+}: BagItemViewProps) {
+  return (
+    <View style={styles.bagItemView}>
+      <LabelText>{item.name}</LabelText>
+      <FlexFill />
+      <BigButton
+        style={styles.quantityButton}
+        title="-"
+        onPress={() => onDecrement(item)}
+      />
+      <LabelText>{item.quantity}</LabelText>
+      <BigButton
+        style={styles.quantityButton}
+        title="+"
+        onPress={() => onIncrement(item)}
+      />
+    </View>
+  );
+}
+
 interface BagViewProps {
   bag: BagItem[];
   onIncrement: (item: BagItem) => void;
@@ -22,21 +51,12 @@ export default function BagView({
         contentContainerStyle={styles.scrollViewContent}
       >
         {bag.map((item) => (
-          <View key={item.id} style={styles.bagItemView}>
-            <LabelText>{item.name}</LabelText>
-            <FlexFill />
-            <BigButton
-              style={styles.quantityButton}
-              title="-"
-              onPress={() => onDecrement(item)}
-            />
-            <LabelText>{item.quantity}</LabelText>
-            <BigButton
-              style={styles.quantityButton}
-              title="+"
-              onPress={() => onIncrement(item)}
-            />
-          </View>
+          <BagItemView
+            key={item.id}
+            item={item}
+            onDecrement={onDecrement}
+            onIncrement={onIncrement}
+          />
         ))}
       </ScrollView>
     </View>

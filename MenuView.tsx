@@ -15,10 +15,18 @@ interface MenuItemViewProps {
 }
 function MenuItemView({ item, onPress }: MenuItemViewProps) {
   return (
-    <View style={styles.horzContainer}>
-      <LabelText key={item.id}>{item.name}</LabelText>
+    <View key={item.id} style={styles.menuHorzView}>
+      <View style={styles.menuItemDetails}>
+        <LabelText>{item.name}</LabelText>
+        <Text style={styles.text}>calories: {item.calories}</Text>
+        <Text style={styles.text}>price: ${item.price}</Text>
+      </View>
       <FlexFill />
-      <Button title="+" onPress={() => onPress(item)} />
+      <BigButton
+        style={styles.addButton}
+        title="+"
+        onPress={() => onPress(item)}
+      />
     </View>
   );
 }
@@ -44,21 +52,11 @@ export default function MenuView({
         contentContainerStyle={styles.scrollViewContent}
       >
         {menu.map((item) => (
-          <View key={item.id} style={styles.menuHorzView}>
-            <View style={styles.menuItemDetails}>
-              <LabelText>{item.name}</LabelText>
-              <Text style={styles.text}>
-                calories: {item.calories}
-              </Text>
-              <Text style={styles.text}>price: ${item.price}</Text>
-            </View>
-            <FlexFill />
-            <BigButton
-              style={styles.addButton}
-              title="+"
-              onPress={() => handleAddItem(item)}
-            />
-          </View>
+          <MenuItemView
+            key={item.id}
+            item={item}
+            onPress={handleAddItem}
+          />
         ))}
       </ScrollView>
     </LctView>
