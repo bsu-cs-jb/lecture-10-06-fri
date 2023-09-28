@@ -11,6 +11,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#BBE",
     borderRadius: 8,
     padding: 6,
+    width: "100%",
+  },
+  addButton: {
+    flexDirection: "row",
+    width: 50,
+    height: 50,
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  menuItemDetails: {
+    alignContent: "flex-start",
   },
   bigButtonUnpressed: {
     backgroundColor: "#33C9FF",
@@ -31,9 +42,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 7,
   },
-  scrollContainer: {
+  scrollView: {
     flex: 1,
-    alignSelf: "flex-start",
+    width: "100%",
+  },
+  scrollViewContent: {
+    flex: 1,
+    gap: 10,
     width: "100%",
   },
   titleText: {
@@ -53,6 +68,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 10,
   },
+  menuHorzView: {
+    flexDirection: "row",
+    gap: 0,
+    justifyContent: "center",
+  },
   topLevelContainer: {
     flex: 1,
     backgroundColor: "#fff",
@@ -61,6 +81,39 @@ const styles = StyleSheet.create({
   },
   avoidingView: {
     flex: 1,
+  },
+  menuView: {
+    flex: 1,
+    width: "100%",
+    backgroundColor: "#cde",
+    borderWidth: 2,
+    borderColor: "#999",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    gap: 5,
+  },
+  bagView: {
+    flex: 1,
+    width: "100%",
+    backgroundColor: "#dfd",
+    borderWidth: 2,
+    borderColor: "#999",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    gap: 5,
+  },
+  bagItemView: {
+    flexDirection: "row",
+    gap: 3,
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  quantityButton: {
+    flexDirection: "row",
+    width: 30,
+    height: 40,
+    alignContent: "center",
+    justifyContent: "center",
   },
   container: {
     flex: 1,

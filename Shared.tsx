@@ -72,9 +72,25 @@ export function LctAvoidingView({ children, ...props }: ViewProps) {
     </KeyboardAvoidingView>
   );
 }
-export function LctView({ children, ...props }: ViewProps) {
+export function LctView({ children, style, ...props }: ViewProps) {
   return (
-    <RenderHighlightView {...props}>{children}</RenderHighlightView>
+    <View style={style}>
+      <RenderHighlightView
+        style={[
+          style,
+          {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+          },
+        ]}
+        {...props}
+      >
+        {children}
+      </RenderHighlightView>
+    </View>
   );
 }
 
