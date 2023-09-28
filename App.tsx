@@ -1,44 +1,10 @@
 import * as React from "react";
-import {
-  Button,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { SafeAreaView, View } from "react-native";
 import styles from "./styles";
-import {
-  BigButton,
-  FlexFill,
-  LabelText,
-  LctView,
-  TitleText,
-} from "./Shared";
+import { TitleText } from "./Shared";
 import MenuView from "./MenuView";
 import BagView from "./BagView";
-
-let lastId = 0;
-function genid() {
-  const randInt = Math.random() * 10 ** 15;
-  const perfNowInt = (performance.now() % 10 ** 5) * 10 ** 10;
-  const p = (randInt + perfNowInt + lastId++).toFixed().toString();
-
-  return `id-${p}`;
-}
-
-/**
- * Food ordering
- * - menu
- * - entree
- * - add-ons
- * - drink
- * - dessert
- * - items have cost
- * - total amount
- * - tax
- * - tip
- * - calorie counts
- */
+import { genid } from "./utils";
 
 const MENU = [
   {
