@@ -5,42 +5,62 @@ import {
   Platform,
   Pressable,
   PressableProps,
+  StyleProp,
   Text,
   TextProps,
+  TextStyle,
   View,
   ViewProps,
   ViewStyle,
 } from "react-native";
 import styles from "./styles";
 
-export function LabelText({ children, style, ...props }: TextProps) {
-  return (
-    <RenderHighlightText style={[styles.labelText, style]} {...props}>
-      {children}
-    </RenderHighlightText>
-  );
+const RENDER_HIGHLIGHT = false;
+
+interface CustomStyleTextProps extends TextProps {
+  customStyle?: StyleProp<TextStyle>;
 }
 
-export function TitleText({ children, style, ...props }: TextProps) {
-  return (
-    <RenderHighlightText style={[styles.titleText, style]} {...props}>
-      {children}
-    </RenderHighlightText>
-  );
-}
-export function SubtitleText({
+export function CustomStyleText({
   children,
+  customStyle,
   style,
   ...props
-}: TextProps) {
-  return (
-    <RenderHighlightText
-      style={[styles.subTitleText, style]}
-      {...props}
-    >
-      {children}
-    </RenderHighlightText>
-  );
+}: CustomStyleTextProps) {
+  if (RENDER_HIGHLIGHT) {
+    return (
+      <RenderHighlightText style={[customStyle, style]} {...props}>
+        {children}
+      </RenderHighlightText>
+    );
+  } else {
+    return (
+      <Text style={[customStyle, style]} {...props}>
+        {children}
+      </Text>
+    );
+  }
+}
+
+export function LabelText(props: TextProps) {
+  return CustomStyleText({
+    customStyle: styles.labelText,
+    ...props,
+  });
+}
+
+export function SubtitleText(props: TextProps) {
+  return CustomStyleText({
+    customStyle: styles.subTitleText,
+    ...props,
+  });
+}
+
+export function TitleText(props: TextProps) {
+  return CustomStyleText({
+    customStyle: styles.titleText,
+    ...props,
+  });
 }
 
 export function FlexFill() {
@@ -52,14 +72,22 @@ export function LctHorzContainer({
   style,
   ...props
 }: ViewProps) {
-  return (
-    <RenderHighlightView
-      style={[style, styles.horzContainer]}
-      {...props}
-    >
-      {children}
-    </RenderHighlightView>
-  );
+  if (RENDER_HIGHLIGHT) {
+    return (
+      <RenderHighlightView
+        style={[style, styles.horzContainer]}
+        {...props}
+      >
+        {children}
+      </RenderHighlightView>
+    );
+  } else {
+    return (
+      <View style={[style, styles.horzContainer]} {...props}>
+        {children}
+      </View>
+    );
+  }
 }
 
 export function LctAvoidingView({ children, ...props }: ViewProps) {
@@ -73,25 +101,29 @@ export function LctAvoidingView({ children, ...props }: ViewProps) {
   );
 }
 export function LctView({ children, style, ...props }: ViewProps) {
-  return (
-    <View style={style}>
-      <RenderHighlightView
-        style={[
-          style,
-          {
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-          },
-        ]}
-        {...props}
-      >
-        {children}
-      </RenderHighlightView>
-    </View>
-  );
+  if (RENDER_HIGHLIGHT) {
+    return (
+      <View style={style}>
+        <RenderHighlightView
+          style={[
+            style,
+            {
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+            },
+          ]}
+          {...props}
+        >
+          {children}
+        </RenderHighlightView>
+      </View>
+    );
+  } else {
+    return <View style={style}>{children}</View>;
+  }
 }
 
 function useRenderHighlight(delay: number = 750) {
