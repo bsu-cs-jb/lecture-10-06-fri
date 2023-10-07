@@ -9,7 +9,7 @@ export default function App() {
   const [method, setMethod] = React.useState<"state"|"ref">("state");
   const [submitText, setSubmitText] = React.useState(initialValue);
   const [inputText, setInputText] = React.useState(initialValue);
-  const tiValue = React.useRef(initialValue);
+  const textInputValueRef = React.useRef(initialValue);
 
   const handleSwitch = () => {
     setMethod((method) =>
@@ -22,8 +22,8 @@ export default function App() {
       console.log("Current value: ", inputText)
       setSubmitText(inputText);
     } else if (method == "ref") {
-      console.log("Current value: ", tiValue.current)
-      setSubmitText(tiValue.current);
+      console.log("Current value: ", textInputValueRef.current)
+      setSubmitText(textInputValueRef.current);
     }
   }
 
@@ -31,7 +31,7 @@ export default function App() {
     if (method == "state") {
       setInputText(text);
     } else if (method == "ref") {
-      tiValue.current = text;
+      textInputValueRef.current = text;
     }
   }
 
